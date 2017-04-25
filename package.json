@@ -1,0 +1,23 @@
+{
+  "name": "is-the-matrix-on",
+  "version": "1.0.0",
+  "description": "Let's you know if The Matrix is currently showing on television.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mdang8/IsTheMatrixOn.git"
+  },
+  "author": "Matt Dang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mdang8/IsTheMatrixOn/issues"
+  },
+  "homepage": "https://github.com/mdang8/IsTheMatrixOn#readme",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2"
+  }
+}
