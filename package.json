@@ -18,6 +18,8 @@
   "homepage": "https://github.com/mdang8/IsTheMatrixOn#readme",
   "dependencies": {
     "body-parser": "^1.17.1",
-    "express": "^4.15.2"
+    "cheerio": "^0.22.0",
+    "express": "^4.15.2",
+    "request": "^2.81.0"
   }
 }
