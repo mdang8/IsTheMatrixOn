@@ -1,6 +1,7 @@
 # IsTheMatrixOn
 
 [![Build Status](https://travis-ci.org/mdang8/IsTheMatrixOn.svg?branch=master)](https://travis-ci.org/mdang8/IsTheMatrixOn)
+[![Dependencies](https://david-dm.org/mdang8/IsTheMatrixOn.svg)]
 
 Let's you know if The Matrix is currently showing on television.
 
