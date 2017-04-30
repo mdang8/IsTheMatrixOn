@@ -19,21 +19,29 @@ describe('Parse TV Listings', function () {
 
     describe('Parse Current Times', function () {
         it('retrieves the current times', function (done) {
-            listingsParse.requestListings(function () {
+            listingsParse.requestListings(function (data) {
                 console.log('Test #2 starting...');
-                let times = listingsParse.parseCurrentListingsTimes();
-                assert.typeOf(times, 'array');
-                assert.lengthOf(times, 6);
-                console.log('Test #2 ending...');
-                done();
+                listingsParse.parseCurrentListingsTimes(data, function (times) {
+                    assert.typeOf(times, 'array');
+                    assert.lengthOf(times, 6);
+                    console.log('Test #2 ending...');
+                    done();
+                });
             });
         });
     });
 
     describe('Parse Current Shows', function () {
-        it('retrieves the current shows', function () {
-            console.log('Test #3 starting...');
-            console.log('Test #3 starting...');
+        it('retrieves the current shows', function (done) {
+            listingsParse.requestListings(function (data) {
+                console.log('Test #3 starting...');
+                listingsParse.parseCurrentShows(data, function (shows) {
+                    assert.typeOf(shows, 'object');
+                    assert.lengthOf(Object.keys(shows), 78);
+                    console.log('Test #3 ending...');
+                    done();
+                });
+            });
         });
     });
 });
