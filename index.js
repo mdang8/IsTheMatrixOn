@@ -24,3 +24,11 @@ app.get('/matrix-status', (req, res) => {
     });
 });
 
+app.get('/current-shows', (req, res) => {
+    listingsParse.requestListings((data) => {
+        listingsParse.parseCurrentShows(data, (shows) => {
+            res.send(shows);
+        });
+    });
+});
+
