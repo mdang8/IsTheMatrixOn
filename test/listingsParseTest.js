@@ -29,8 +29,8 @@ describe('Parse TV Listings', function () {
         it('retrieves the current times', function (done) {
             listingsParse.requestListings(function (data) {
                 listingsParse.parseCurrentListingsTimes(data, function (times) {
-                    assert.typeOf(times, 'array');
-                    assert.lengthOf(times, 6);
+                    assert.typeOf(times, 'object');
+                    assert.equal(Object.keys(times).length, 11);
                     done();
                 });
             });
@@ -43,7 +43,6 @@ describe('Parse TV Listings', function () {
                 listingsParse.parseCurrentShows(data, function (shows) {
                     assert.typeOf(shows, 'object');
                     assert.lengthOf(Object.keys(shows), 78);
-                    console.log(shows);
                     done();
                 });
             });
