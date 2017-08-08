@@ -21,24 +21,27 @@
         <![endif]-->
     </head>
     <body>
-    <h1>Is the Matrix On?</h1>
-
-    <div class="container">
-        <div class="col-md-8 col-md-offset-2">
-            <form action="/search" method="POST">
-                <div class="input-group add-on">
-                    <input type="text" class="form-control" placeholder="Search for a show" name="search">
-                    <div class="input-group-btn">
-                        <button class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-                    </div>
-                </div>
-            </form>
+        <div class="container">
+            <h1>Is the Matrix On?</h1>
         </div>
-    </div>
+        <div class="container" id="status"></div>
+        <div class="container">
+            <div class="col-md-8 col-md-offset-2">
+                <form action="/search" method="POST">
+                    <div class="input-group add-on">
+                        <input type="text" class="form-control" placeholder="Search for another show" name="search">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <script src="lib/main.js"></script>
     </body>
 </html>

@@ -10,3 +10,21 @@ body {
     text-align: center;
     text-shadow: 0 1px 3px rgba(0,0,0,.5);
 }
+
+#status {
+    font-size: 2em;
+    line-height: 1em;
+    font-weight: bold;
+    padding: 10%;
+}
+
+@media only screen and (min-width: 768px) {
+    #status {
+        font-size: 600%;
+        text-align: center;
+        margin: 0 auto;
+        line-height: 1em;
+        font-weight: bold;
+        padding: 10%;
+    }
+}
