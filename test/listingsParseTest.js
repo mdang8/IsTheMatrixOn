@@ -1,6 +1,7 @@
 'use strict';
 
 const listingsParse = require('../lib/listingsParse.js');
+const listingsSearch = require('../lib/listingsSearch.js');
 const chai = require('chai');
 const assert = chai.assert;
 
@@ -16,36 +17,37 @@ describe('Test', function () {
 });
 
 describe('Parse TV Listings', function () {
-    describe('Request HTML', function () {
-        it('retrieves the HTML document', function (done) {
-            listingsParse.requestListings(function (data) {
-                assert.typeOf(data, 'string');
-                done();
-            });
+    let htmlDocument = '';
+
+    it('retrieves the HTML document', function (done) {
+        listingsParse.requestListings((data) => {
+            htmlDocument = data;
+            assert.typeOf(data, 'string');
+            done();
         });
     });
 
-    describe('Parse Current Times', function () {
-        it('retrieves the current times', function (done) {
-            listingsParse.requestListings(function (data) {
-                listingsParse.parseCurrentListingsTimes(data, function (times) {
-                    assert.typeOf(times, 'object');
-                    assert.equal(Object.keys(times).length, 11);
-                    done();
-                });
-            });
+    it('retrieves the current times', function (done) {
+        listingsParse.parseCurrentListingsTimes(htmlDocument, function (times) {
+            assert.typeOf(times, 'object');
+            assert.equal(Object.keys(times).length, 11);
+            done();
         });
     });
 
-    describe('Parse Current Shows', function () {
-        it('retrieves the current shows', function (done) {
-            listingsParse.requestListings(function (data) {
-                listingsParse.parseCurrentShows(data, function (shows) {
-                    assert.typeOf(shows, 'object');
-                    assert.lengthOf(Object.keys(shows), 78);
-                    done();
-                });
-            });
+    it('retrieves the current shows', function (done) {
+        listingsParse.parseCurrentShows(htmlDocument, function (shows) {
+            assert.typeOf(shows, 'array');
+            done();
+        });
+    });
+
+    it('retrieves all the unique channels', function (done) {
+        listingsParse.parseUniqueChannels(htmlDocument, function (channels) {
+            assert.typeOf(channels, 'array');
+            assert.equal(channels.length, 78);
+            done();
         });
     });
 });
+
