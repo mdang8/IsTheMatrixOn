@@ -1,23 +1,47 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<title>Is The Matrix On?</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link type="text/css" rel="stylesheet" href="/css/stylesheetMatrixCheck.css"/>
-	</head>
-	<body>
-		<div id="loadingDiv">
-			<img id="loadingAnim" src="/img/loadingAnim.gif" height="64" width="64">
-		</div>
-		<div id="responseDiv">
-			<div id="statusDiv"></div>
-			<div id="responseGifDiv"></div>
-		</div>
-		<div id="otherTextDiv"></div>
-		<div id="searchForShow">
-			<h3>Search for another show:</h3>
-			<input type="text" id="searchShow">
-			<input type="submit" onclick="" value="Search">
-		</div>
-	</body>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <title>Is the Matrix On?</title>
+
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <!-- custom CSS -->
+        <link rel="stylesheet" href="css/isTheMatrixOn.css">
+
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <div class="container">
+            <h1>Is the Matrix On?</h1>
+        </div>
+        <div class="container" id="status"></div>
+        <div class="container">
+            <div class="col-md-8 col-md-offset-2">
+                <form action="/search" method="POST">
+                    <div class="input-group add-on">
+                        <input type="text" class="form-control" placeholder="Search for another show" name="search">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <script src="lib/main.js"></script>
+    </body>
 </html>
