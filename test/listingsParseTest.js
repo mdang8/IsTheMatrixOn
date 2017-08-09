@@ -1,7 +1,6 @@
 'use strict';
 
 const listingsParse = require('../lib/listingsParse.js');
-const listingsSearch = require('../lib/listingsSearch.js');
 const chai = require('chai');
 const assert = chai.assert;
 
@@ -50,4 +49,3 @@ describe('Parse TV Listings', function () {
         });
     });
 });
-
