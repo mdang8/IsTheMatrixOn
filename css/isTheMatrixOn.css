@@ -24,6 +24,7 @@ body {
 }
 
 #time {
+    padding: 0px;
     width: 100%;
     height: 1em;
     font-size: 0.75em;
