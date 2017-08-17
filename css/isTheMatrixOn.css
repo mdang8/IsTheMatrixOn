@@ -18,6 +18,10 @@ body {
     padding: 10%;
 }
 
+#status-details {
+    word-wrap: break-word;
+}
+
 @media only screen and (min-width: 768px) {
     #status {
         font-size: 600%;
