@@ -29,9 +29,11 @@ function postRequestShow(show) {
     };
 
     function postSuccess(data) {
+        let statusElem = document.getElementById('status');
+        let statusDetailsElem = document.getElementById('status-details');
+
         if (typeof data !== 'undefined' && data.length !== 0) {
             let showing = determineCurrentlyShowing(data, time);
-            console.log(showing);
             let resultStr = '';
             // the array of currently showing instances of the show
             let showingCurrently = showing.current;
@@ -52,10 +54,11 @@ function postRequestShow(show) {
                 }
             }
 
-            document.getElementById('status').innerHTML = 'Yes.';
-            document.getElementById('status-details').innerHTML = resultStr;
+            statusElem.innerHTML = 'Yes.';
+            statusDetailsElem.innerHTML = resultStr;
         } else {
-            document.getElementById('status').innerHTML = 'No.';
+            statusElem.innerHTML = 'No.';
+            statusDetailsElem.innerHTML = '"' + show + '" is not currently on, nor will it be within the next 3 hours :(';
         }
 
         document.getElementById('search-input').value = '';
