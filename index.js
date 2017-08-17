@@ -17,8 +17,6 @@ app.listen(3000, () => {
 });
 
 app.get('/', (req, res) => {
-    console.log('Received GET request on "/"');
-    console.log('__dirname: ' + __dirname);
     res.sendFile(__dirname + '/index.html');
 });
 
@@ -52,7 +50,8 @@ app.post('/search', (req, res) => {
 
     listingsParse.requestListings((listings) => {
         listingsSearch.searchShow(showName, listings, (results) => {
-            res.send(results);
+            res.type('application/json');
+            res.json(results);
         });
     });
 });
