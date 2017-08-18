@@ -12,8 +12,8 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(express.static(__dirname));
 
-app.listen(process.env.PORT || 5000, () => {
-    console.log('Listening on port 5000');
+app.listen(3000, () => {
+    console.log('Listening on port 3000');
 });
 
 app.get('/', (req, res) => {
