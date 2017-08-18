@@ -2,11 +2,11 @@
   "name": "is-the-matrix-on",
   "version": "1.0.0",
   "description": "Let's you know if The Matrix is currently showing on television.",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "nyc --reporter=html --reporter=text mocha",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "dev": "nodemon index.js"
+    "dev": "nodemon server.js"
   },
   "repository": {
     "type": "git",
