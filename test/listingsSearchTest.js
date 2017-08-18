@@ -10,6 +10,7 @@ describe('Search TV Listings', function () {
     let showToSearch = '';
 
     it('searches for a non-existent show', function (done) {
+        this.timeout(10000);
         showToSearch = '# not a real show #';
         listingsParse.requestListings((data) => {
             listingsSearch.searchShow(showToSearch, data, (results) => {

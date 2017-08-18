@@ -19,6 +19,7 @@ describe('Parse TV Listings', function () {
     let htmlDocument = '';
 
     it('retrieves the HTML document', function (done) {
+        this.timeout(10000);
         listingsParse.requestListings((data) => {
             htmlDocument = data;
             assert.typeOf(data, 'string');
