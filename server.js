@@ -15,7 +15,9 @@ app.use(express.static(__dirname));
 
 // creates the listings text file if it doesn't already exist
 if (!fs.existsSync(__dirname + '/listings.txt')) {
-    listingsParse.updateListingsFile();
+    listingsParse.updateListingsFile(() => {
+        console.log('Created listings file.');
+    });
 }
 
 app.listen(process.env.PORT || 3000, () => {
