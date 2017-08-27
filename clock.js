@@ -5,7 +5,7 @@ const schedule = require('node-schedule');
 const fs = require('fs');
 
 // scheduled to run every hour at minute 0
-let job = schedule.scheduleJob('0 * * * *', function () {
+let job = schedule.scheduleJob('*/15 * * * *', function () {
     listingsParse.updateListingsFile(() => {
         let updateLogFile = __dirname + '/updateLog.txt';
         let logStr = 'Updated: ' + new Date() + '\n';
