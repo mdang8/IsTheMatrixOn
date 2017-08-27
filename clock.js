@@ -9,10 +9,19 @@ let job = schedule.scheduleJob('*/15 * * * *', function () {
     listingsParse.updateListingsFile(() => {
         let updateLogFile = __dirname + '/updateLog.txt';
         let logStr = 'Updated: ' + new Date() + '\n';
-        fs.appendFile(updateLogFile, logStr, (err) => {
-            if (err) {
-                console.error(err);
-            }
-        });
+
+        if (!fs.existsSync(__dirname + '/updateLog.txt')) {
+            fs.writeFile(updateLogFile, logStr, (err) => {
+                if (err) {
+                    console.error(err);
+                }
+            });
+        } else {
+            fs.appendFile(updateLogFile, logStr, (err) => {
+                if (err) {
+                    console.error(err);
+                }
+            });
+        }
     });
 });
