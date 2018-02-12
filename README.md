@@ -14,6 +14,6 @@ So, it's basically web page with a Matrix theme that can search when television 
 Why have it be revolving around *The Matrix*? At the time when I was trying to come up with beginner projects to help me learn HTML, CSS, and JavaScript, I found out my roommate really liked the *The Matrix* movie, so I did this kind of as a joke and it progressed to what it is now.
 
 ## Usage
-Go to https://is-the-matrix-on.herokuapp.com/ and it will automatically display whether the *The Matrix* is on or not.
+Go to https://isthematrixon.herokuapp.com/ and it will automatically display whether the *The Matrix* is on or not.
 
 There is also a search bar that will accept the name of a television show or movie, and replace the status text with details about the search.
