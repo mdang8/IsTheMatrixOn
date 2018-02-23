@@ -1,38 +1,21 @@
 {
-  "name": "is-the-matrix-on",
-  "version": "1.0.0",
-  "description": "Let's you know if The Matrix is currently showing on television.",
-  "main": "index.js",
+  "name": "isthematrixon",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "test": "nyc --reporter=html --reporter=text mocha",
-    "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "dev": "nodemon index.js"
+    "start": "node ./bin/www",
+    "devstart": "nodemon ./bin/www"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/mdang8/IsTheMatrixOn.git"
-  },
-  "author": "Matt Dang",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/mdang8/IsTheMatrixOn/issues"
-  },
-  "homepage": "https://github.com/mdang8/IsTheMatrixOn#readme",
   "dependencies": {
-    "body-parser": "^1.17.1",
-    "cheerio": "^1.0.0-rc.2",
-    "express": "^4.15.2",
-    "request": "^2.81.0"
+    "body-parser": "~1.18.2",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "express": "~4.15.5",
+    "morgan": "~1.9.0",
+    "pug": "2.0.0-beta11",
+    "serve-favicon": "~2.4.5"
   },
   "devDependencies": {
-    "chai": "^4.1.1",
-    "coveralls": "^2.13.1",
-    "karma": "^1.7.0",
-    "karma-coverage": "^1.1.1",
-    "karma-mocha": "^1.3.0",
-    "mocha": "^3.5.0",
-    "mocha-lcov-reporter": "^1.3.0",
-    "nodemon": "^1.11.0",
-    "nyc": "^11.1.0"
+    "nodemon": "^1.15.1"
   }
 }
