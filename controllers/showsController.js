@@ -6,20 +6,26 @@ function index() {
 }
 
 function listCurrentShows(callback) {
-  listingsParse.requestListings(listings => {
-    const shows = listingsParse.parseCurrentShows(listings);
+  database.createClient(client => {
+    const db = database.connectDatabase(client);
+    database.retrieveCurrentShows(db, shows => {
+      database.disconnectDatabase(client);
 
-    callback(shows);
+      callback(shows);
+    });
   });
 }
 
-function createShow(show, callback) {
-  const model = database.createModel();
+function createSingleShow(show, callback) {
+}
 
-  database.connectDB(db => {
-    database.addShow(show, model, db, () => {
-      database.disconnectDB();
-      callback(null);
+function createMultipleShows(shows, callback) {
+  database.createClient(client => {
+    const db = database.connectDatabase(client);
+    database.insertShows(shows, db, results => {
+      database.disconnectDatabase(client);
+
+      callback(results);
     });
   });
 }
@@ -34,4 +40,4 @@ function deleteShow() {
 
 module.exports.index = index;
 module.exports.listCurrentShows = listCurrentShows;
-module.exports.createShow = createShow;
+module.exports.createMultipleShows = createMultipleShows;

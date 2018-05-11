@@ -5,13 +5,13 @@ const showsController = require('../controllers/showsController');
 
 router.get('/', function (req, res) {
   showsController.listCurrentShows(shows => {
-    res.send(shows);
+    res.status(200).send(shows);
   });
 });
 
 router.post('/', function (req, res) {
-  showsController.createShow(data => {
-    res.send('OK.');
+  showsController.createMultipleShows(req.body, results => {
+    res.status(200).send(results);
   });
 });
 
