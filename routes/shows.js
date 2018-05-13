@@ -4,9 +4,11 @@ const router = express.Router();
 const showsController = require('../controllers/showsController');
 
 router.get('/', function (req, res) {
-  showsController.listCurrentShows(shows => {
-    res.status(200).send(shows);
-  });
+  showsController.listCurrentShows(req, res);
+});
+
+router.get('/channel-shows', function (req, res) {
+  showsController.listChannelShows(req, res);
 });
 
 router.post('/', function (req, res) {

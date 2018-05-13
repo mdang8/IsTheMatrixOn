@@ -6,3 +6,8 @@ body {
 a {
   color: #00B7FF;
 }
+
+p {
+  margin-top: 10px;
+  margin-bottom: 1px;
+}

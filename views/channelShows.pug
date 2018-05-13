@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  h1= title
+
+  each channelShows in channelShowsList
+    div
+      p #[strong= channelShows.channel]
+      each show in channelShows.shows
+        li= show.show
