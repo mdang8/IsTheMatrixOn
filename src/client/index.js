@@ -5,4 +5,6 @@ import Main from './components/Main.jsx';
 
 import './scss/app.scss';
 
-render(<Main />, document.getElementById('root'));
+if (document.getElementById('root')) {
+  render(<Main />, document.getElementById('root'));
+}
