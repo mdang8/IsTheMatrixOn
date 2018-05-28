@@ -17,3 +17,65 @@ body {
 .search-group {
   margin: 20px auto 20px auto;
 }
+
+/******************** Styles for Result component ********************/
+.found-show * {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+// .found-show p {
+//   margin-bottom: 0px;
+// }
+
+#result {
+  margin: 80px auto 80px auto;
+}
+
+/******************** Styles for Footer ********************/
+.icons {
+  margin: 20px auto 20px auto;
+}
+
+.icon-link {
+  color: inherit;
+}
+
+.icon-link:hover {
+  color: #4286f4;
+}
+
+/******************** Styles for GitHub Corner ********************/
+#github-corner-div {
+  height: 80px;
+}
+
+.github-corner:hover .octo-arm {
+  animation: octocat-wave 560ms ease-in-out;
+}
+
+@keyframes octocat-wave {
+  0% {
+    transform: rotate(0deg);
+  }
+  
+  20% {
+    transform: rotate(-25deg);
+  }
+  
+  40% {
+    transform: rotate(10deg);
+  }
+  
+  60% {
+   transform: rotate(-25deg);
+  }
+  
+  80% {
+    transform: rotate(10deg);
+  }
+  
+  100% {
+    transform: rotate(0deg);
+  }
+}
