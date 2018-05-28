@@ -6,7 +6,7 @@ function requestListings(callback) {
 
   request(url, (err, res, body) => {
     if (err && res.statusCode !== 200) {
-      throw 'Error with retrieving listings: ' + err;
+      throw new Error(`Error with retrieving listings: ${err}`);
     }
 
     callback(body);
@@ -89,17 +89,17 @@ function parseCurrentShows(htmlDocument) {
 
       // adds object with show data to the array of shows
       shows.push({
-        show: showName,
+        name: showName,
         channel: channel,
         startTime: new Date(currentDate.getFullYear(),
                             currentDate.getMonth(),
-                            currentDate.getDate(), 
-                            startTime.hour, 
+                            currentDate.getDate(),
+                            startTime.hour,
                             startTime.minute),
-        endTime: new Date(currentDate.getFullYear(), 
-                          currentDate.getMonth(), 
-                          currentDate.getDate(), 
-                          endTime.hour, 
+        endTime: new Date(currentDate.getFullYear(),
+                          currentDate.getMonth(),
+                          currentDate.getDate(),
+                          endTime.hour,
                           endTime.minute),
         current: true,
       });
@@ -108,6 +108,8 @@ function parseCurrentShows(htmlDocument) {
     // resets time accumulator
     timeAcc = 0;
   });
+
+  console.log(`Parsed ${shows.length} shows.`);
 
   return shows;
 }

@@ -7,6 +7,10 @@ router.get('/', (req, res) => {
   showsController.listCurrentShows(req, res);
 });
 
+router.get('/search', (req, res) => {
+  showsController.searchShow(req, res);
+});
+
 router.get('/channel-shows', (req, res) => {
   showsController.listChannelShows(req, res);
 });
