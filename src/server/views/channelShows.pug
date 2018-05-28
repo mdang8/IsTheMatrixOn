@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  div(id="data")
+    h1= title
+
+    each channelShows in channelShowsList
+      div(class="channel-shows")
+        p #[strong= channelShows.channel]
+        each show in channelShows.shows
+          li= show.name
