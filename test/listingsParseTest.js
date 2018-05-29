@@ -1,5 +1,6 @@
-const listingsParse = require('../lib/listingsParse');
+const listingsParse = require('../src/server/lib/listingsParse');
 const chai = require('chai');
+
 const assert = chai.assert;
 
 describe('Parse TV Listings', function () {
@@ -16,8 +17,8 @@ describe('Parse TV Listings', function () {
 
   it('retrieves the current times', function (done) {
     const times = listingsParse.parseCurrentListingsTimes(htmlDocument);
-    assert.typeOf(times, 'object');
-    assert.equal(Object.keys(times).length, 12);
+    assert.typeOf(times, 'array');
+    assert.equal(Object.keys(times).length, 13);
     done();
   });
 
@@ -28,7 +29,7 @@ describe('Parse TV Listings', function () {
   });
 
   it('retrieves all the unique channels', function (done) {
-    const channels = listingsParse.parseUniqueChannels(htmlDocument);
+    const channels = listingsParse.getUniqueChannels(htmlDocument);
     assert.typeOf(channels, 'array');
     assert.equal(channels.length, 496);
     done();
