@@ -1,10 +1,6 @@
 const database = require('../lib/database.js');
 // const listingsParse = require('../lib/listingsParse.js');
 
-function index() {
-  // @TODO
-}
-
 /**
  * Uses the @function databaseCurrentShows to retrieve all of the current shows and sends the
  * unformatted array to the given response.
@@ -71,28 +67,37 @@ function searchShow(req, res) {
  * @param {Object[]} shows - The shows to add to the database.
  * @param {function} callback - The callback function.
  */
-function createMultipleShows(shows, callback) {
+function createMultipleShows(req, res) {
   database.createClient((client) => {
     const db = database.connectDatabase(client);
-    database.insertShows(shows, db, (results) => {
+    database.insertShows(req.body, db, (results) => {
       database.disconnectDatabase(client);
 
-      callback(results);
+      res.status(200).send(results);
     });
   });
 }
 
-function updateShow() {
-  // @TODO
-}
+// function updateShow() {
+//   // @TODO
+// }
 
 function deleteAllShows() {
-  // @TODO
   database.createClient((client) => {
     const db = database.connectDatabase(client);
     database.deleteAll(db, (results) => {
       database.disconnectDatabase(client);
       console.log(results);
+    });
+  });
+}
+
+function deleteChannel(req, res) {
+  database.createClient((client) => {
+    const db = database.connectDatabase(client);
+    database.deleteShowsByChannel(req.body.channel, db, (results) => {
+      database.disconnectDatabase(client);
+      res.status(200).send(results);
     });
   });
 }
@@ -133,9 +138,9 @@ function formatShowsData(shows) {
   return formattedData;
 }
 
-module.exports.index = index;
 module.exports.listCurrentShows = listCurrentShows;
 module.exports.listChannelShows = listChannelShows;
 module.exports.searchShow = searchShow;
 module.exports.createMultipleShows = createMultipleShows;
 module.exports.deleteAllShows = deleteAllShows;
+module.exports.deleteChannel = deleteChannel;

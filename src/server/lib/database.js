@@ -5,7 +5,7 @@ function createClient(callback) {
 
   mongodb.MongoClient.connect(mongoURL, (err, client) => {
     if (err) {
-      throw new Error('Error with connecting to MongoDB.');
+      throw err;
     }
 
     callback(client);
@@ -26,7 +26,7 @@ function insertShows(shows, db, callback) {
   const collection = db.collection('Shows');
   collection.insertMany(shows, (err, result) => {
     if (err) {
-      throw new Error('Error with inserting shows.');
+      throw err;
     }
 
     callback(result);
@@ -37,7 +37,7 @@ function retrieveCurrentShows(db, callback) {
   const collection = db.collection('Shows');
   collection.find({ current: true }).toArray((err, docs) => {
     if (err) {
-      throw new Error('Error with retrieving current shows.');
+      throw err;
     }
 
     callback(docs);
@@ -60,7 +60,18 @@ function deleteAll(db, callback) {
   const collection = db.collection('Shows');
   collection.deleteMany({}, (err, result) => {
     if (err) {
-      throw new Error('Error with deleting all shows', err);
+      throw err;
+    }
+
+    callback(result);
+  });
+}
+
+function deleteShowsByChannel(channel, db, callback) {
+  const collection = db.collection('Shows');
+  collection.deleteMany({ channel }, (err, result) => {
+    if (err) {
+      throw err;
     }
 
     callback(result);
@@ -74,3 +85,4 @@ module.exports.insertShows = insertShows;
 module.exports.retrieveCurrentShows = retrieveCurrentShows;
 module.exports.retrieveShow = retrieveShow;
 module.exports.deleteAll = deleteAll;
+module.exports.deleteShowsByChannel = deleteShowsByChannel;
