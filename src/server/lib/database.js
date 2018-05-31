@@ -1,7 +1,13 @@
 const mongodb = require('mongodb');
 
 function createClient(callback) {
-  const mongoURL = 'mongodb://localhost:27017';
+  // const mongoURL = 'mongodb://localhost:27017';
+  const dbUser = encodeURIComponent(process.env.db_user);
+  const dbPassword = encodeURIComponent(process.env.db_password);
+  const dbHost = encodeURIComponent(process.env.db_host);
+  const dbPort = encodeURIComponent(process.env.db_port);
+  const dbName = encodeURIComponent(process.env.db_name);
+  const mongoURL = `mongodb://${dbUser}:${dbPassword}@${dbHost}:${dbPort}/${dbName}`;
 
   mongodb.MongoClient.connect(mongoURL, (err, client) => {
     if (err) {
@@ -13,7 +19,7 @@ function createClient(callback) {
 }
 
 function connectDatabase(client) {
-  const databaseName = 'IsTheMatrixOn';
+  const databaseName = process.env.db_name;
 
   return client.db(databaseName);
 }
