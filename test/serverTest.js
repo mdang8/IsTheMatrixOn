@@ -89,3 +89,15 @@ describe('Test Shows API', function () {
       });
   });
 });
+
+describe('Test Users API', function () {
+  it('requests all of the users', function (done) {
+    chai.request(server)
+      .get('/api/v1/users')
+      .end(function (err, res) {
+        res.should.have.status(200);
+        res.should.be.string;
+        done();
+      });
+  });
+});

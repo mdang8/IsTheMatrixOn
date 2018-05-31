@@ -30,13 +30,11 @@ describe('Parse TV Listings', () => {
     done();
   });
 
-
-  // it('retrieves the HTML document', function (done) {
-  //   this.timeout(10000);
-  //   listingsParse.requestListings((data) => {
-  //     htmlDocument = data;
-  //     assert.typeOf(data, 'string');
-  //     done();
-  //   });
-  // });
+  it('retrieves the HTML document', function (done) {
+    this.timeout(10000);
+    listingsParse.requestListings((data) => {
+      assert.typeOf(data, 'string');
+      done();
+    });
+  });
 });
