@@ -1,19 +1,14 @@
 const listingsParse = require('../src/server/lib/listingsParse');
 const chai = require('chai');
+const fs = require('fs');
+const path = require('path');
 
-const assert = chai.assert;
+const { assert } = chai;
 
-describe('Parse TV Listings', function () {
-  let htmlDocument = '';
-
-  it('retrieves the HTML document', function (done) {
-    this.timeout(10000);
-    listingsParse.requestListings((data) => {
-      htmlDocument = data;
-      assert.typeOf(data, 'string');
-      done();
-    });
-  });
+/* eslint-disable prefer-arrow-callback */
+describe('Parse TV Listings', () => {
+  const testListingsPath = path.join(__dirname, './../testListings.html');
+  const htmlDocument = fs.readFileSync(testListingsPath, 'utf8');
 
   it('retrieves the current times', function (done) {
     const times = listingsParse.parseCurrentListingsTimes(htmlDocument);
@@ -34,4 +29,14 @@ describe('Parse TV Listings', function () {
     assert.equal(channels.length, 496);
     done();
   });
+
+
+  // it('retrieves the HTML document', function (done) {
+  //   this.timeout(10000);
+  //   listingsParse.requestListings((data) => {
+  //     htmlDocument = data;
+  //     assert.typeOf(data, 'string');
+  //     done();
+  //   });
+  // });
 });
