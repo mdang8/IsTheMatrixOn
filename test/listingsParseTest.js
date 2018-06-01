@@ -18,12 +18,14 @@ describe('Parse TV Listings', () => {
   });
 
   it('retrieves the current shows', function (done) {
+    this.timeout(5000);
     const shows = listingsParse.parseCurrentShows(htmlDocument);
     assert.typeOf(shows, 'array');
     done();
   });
 
   it('retrieves all the unique channels', function (done) {
+    this.timeout(5000);
     const channels = listingsParse.getUniqueChannels(htmlDocument);
     assert.typeOf(channels, 'array');
     assert.equal(channels.length, 496);
