@@ -49,7 +49,7 @@ function searchShow(req, res) {
   if (req.query.show) {
     database.createClient((client) => {
       const db = database.connectDatabase(client);
-      database.retrieveShowByName(req.query.show, db, (results) => {
+      database.findShowByName(req.query.show, db, (results) => {
         database.disconnectDatabase(client);
         const showsData = formatShowsData(results);
 
@@ -115,7 +115,7 @@ function deleteChannel(req, res) {
 function databaseCurrentShows(callback) {
   database.createClient((client) => {
     const db = database.connectDatabase(client);
-    database.retrieveCurrentShows(db, (shows) => {
+    database.findCurrentShows(db, (shows) => {
       database.disconnectDatabase(client);
       const showsData = formatShowsData(shows);
 
