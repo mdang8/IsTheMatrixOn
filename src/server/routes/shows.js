@@ -16,9 +16,11 @@ router.get('/channel-shows', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  showsController.createMultipleShows(req.body, (results) => {
-    res.status(200).send(results);
-  });
+  showsController.createMultipleShows(req, res);
+});
+
+router.delete('/', (req, res) => {
+  showsController.deleteChannel(req, res);
 });
 
 module.exports = router;

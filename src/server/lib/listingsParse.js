@@ -22,17 +22,17 @@ function parseCurrentListingsTimes(htmlDocument) {
     // splits the text of the time (originally in the form 'H:MM XM', e.g. '4:30 PM')
     let timeSplit = $(this).text().split(' ');
     let meridiem = timeSplit[1];
-    let hour = (meridiem === 'AM') ? 
-        parseInt(timeSplit[0].split(':')[0]) % 12 : 
-        parseInt(timeSplit[0].split(':')[0]) + 12;
-    let minute = parseInt(timeSplit[0].split(':')[1]);
+    let hour = (meridiem === 'AM') ?
+      parseInt(timeSplit[0].split(':')[0], 10) % 12 :
+      parseInt(timeSplit[0].split(':')[0], 10) + 12;
+    let minute = parseInt(timeSplit[0].split(':')[1], 10);
 
     // @TODO - fix times array to contain Date objects
 
     // adds the time in the element to the times array
     times.push({
-      hour: hour,
-      minute: minute,
+      hour,
+      minute,
     });
 
     // assigns the 15-minute interval times between each of the 6 current listing times (15 and 45)
@@ -56,28 +56,34 @@ function parseCurrentShows(htmlDocument) {
   const times = this.parseCurrentListingsTimes(htmlDocument);
   const currentDate = new Date();
   const shows = [];
-  let channel, showName;
+  let channel = '';
+  let showName = '';
   let timeAcc = 0;
   // regex for finding width style values (example string: "width:150px")
-  const widthRegex = new RegExp('(?<=width:)(.*)(?=px)');
+  const widthRegex = new RegExp('width:(.*)px');
   // size of a time slot (style width of 75px = 15 minutes)
   const blockSize = 75;
 
   // go through each channel
   $('.zc-row').each(function (i, element) {
     // text value of the channel name
-    channel = $(this).find('.zc-st').find('.zc-st-c').find('.zc-st-a').text();
+    channel = $(this).find('.zc-st')
+      .find('.zc-st-c')
+      .find('.zc-st-a')
+      .text();
     // go through each show on the channel
     $(this).find('.zc-pg').each(function (j, e) {
       // text value of the show name
-      showName = $(this).find('.zc-pg-t').text();
+      showName = $(this).find('.zc-pg-t')
+        .text();
       let showStyle = $(this).attr('style');
-      let startTime, endTime = null;
+      let startTime = null;
+      let endTime = null;
 
       // **the last show on a channel does not have a style attribute**
       if (showStyle !== undefined) {
         // executes the regex to match the width value
-        let widthValue = parseInt(widthRegex.exec(showStyle)[0]);
+        let widthValue = parseInt(widthRegex.exec(showStyle)[1], 10);
         startTime = times[timeAcc];
         // adds filled time slots to time accumulator
         timeAcc += Math.floor(widthValue / blockSize);
@@ -91,16 +97,20 @@ function parseCurrentShows(htmlDocument) {
       shows.push({
         name: showName,
         channel: channel,
-        startTime: new Date(currentDate.getFullYear(),
-                            currentDate.getMonth(),
-                            currentDate.getDate(),
-                            startTime.hour,
-                            startTime.minute),
-        endTime: new Date(currentDate.getFullYear(),
-                          currentDate.getMonth(),
-                          currentDate.getDate(),
-                          endTime.hour,
-                          endTime.minute),
+        startTime: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          startTime.hour,
+          startTime.minute
+        ),
+        endTime: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          endTime.hour,
+          endTime.minute
+        ),
         current: true,
       });
     });
