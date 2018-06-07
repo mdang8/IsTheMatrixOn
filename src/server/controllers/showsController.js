@@ -1,5 +1,4 @@
 const database = require('../lib/database.js');
-// const listingsParse = require('../lib/listingsParse.js');
 
 /**
  * Uses the @function databaseCurrentShows to retrieve all of the current shows and sends the
@@ -50,7 +49,7 @@ function searchShow(req, res) {
   if (req.query.show) {
     database.createClient((client) => {
       const db = database.connectDatabase(client);
-      database.retrieveShow(req.query.show, db, (results) => {
+      database.retrieveShowByName(req.query.show, db, (results) => {
         database.disconnectDatabase(client);
         const showsData = formatShowsData(results);
 
@@ -64,8 +63,8 @@ function searchShow(req, res) {
 
 /**
  * Makes a call to the database function to insert the given shows to the database.
- * @param {Object[]} shows - The shows to add to the database.
- * @param {function} callback - The callback function.
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
  */
 function createMultipleShows(req, res) {
   database.createClient((client) => {
@@ -78,20 +77,26 @@ function createMultipleShows(req, res) {
   });
 }
 
-// function updateShow() {
-//   // @TODO
-// }
-
-function deleteAllShows() {
+/**
+ * Makes a call to the database function to delete all of the shows in the database.
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ */
+function deleteAllShows(req, res) {
   database.createClient((client) => {
     const db = database.connectDatabase(client);
     database.deleteAll(db, (results) => {
       database.disconnectDatabase(client);
-      console.log(results);
+      res.status(200).send(results);
     });
   });
 }
 
+/**
+ * Makes a call to the database function to delete all of the shows for the given channel.
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ */
 function deleteChannel(req, res) {
   database.createClient((client) => {
     const db = database.connectDatabase(client);
