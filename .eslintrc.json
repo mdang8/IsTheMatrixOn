@@ -2,8 +2,11 @@
   "extends": ["airbnb"],
   "env": {
     "browser": true,
-    "node": true
+    "node": true,
+    "es6": true,
+    "mocha": true
   },
+  "parser": "typescript-eslint-parser",
   "rules": {
     "no-console": "off",
     "comma-dangle": "off",

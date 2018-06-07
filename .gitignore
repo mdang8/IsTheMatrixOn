@@ -2,5 +2,6 @@
 node_modules/
 src/client/build/
 coverage/
+dist/
 logs
 *.log
