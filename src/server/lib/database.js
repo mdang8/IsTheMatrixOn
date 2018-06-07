@@ -2,7 +2,7 @@ const mongodb = require('mongodb');
 
 /**
  * Creates a MongoDB client.
- * @param {Function} callback - The callback function.
+ * @param {function} callback - The callback function.
  */
 function createClient(callback) {
   // const mongoURL = 'mongodb://localhost:27017';
@@ -44,7 +44,7 @@ function disconnectDatabase(client) {
  * Inserts the given shows to the given database.
  * @param {Object[]} shows - The shows to insert.
  * @param {Object} db - The database to use.
- * @param {Function} callback - The callback function
+ * @param {function} callback - The callback function
  */
 function insertShows(shows, db, callback) {
   const collection = db.collection('Shows');
@@ -68,9 +68,9 @@ function findCurrentShows(db, callback) {
 
 /**
  * Finds all of the shows with the given name in the given database.
- * @param {String} showName - The show to find.
+ * @param {string} showName - The show to find.
  * @param {Object} db - The database to use.
- * @param {Function} callback - The callback function.
+ * @param {function} callback - The callback function.
  */
 function findShowByName(showName, db, callback) {
   return findShows({ name: showName }, db, callback);
@@ -81,7 +81,7 @@ function findShowByName(showName, db, callback) {
  * the given search parameters.
  * @param {Object} option - The search parameters.
  * @param {Object} db - The database to use.
- * @param {Function} callback - The callback function.
+ * @param {function} callback - The callback function.
  */
 function findShows(option, db, callback) {
   const collection = db.collection('Shows');
@@ -97,7 +97,7 @@ function findShows(option, db, callback) {
 /**
  * Deletes all of existing the show documents in the Shows collection in the given database.
  * @param {Object} db - The database to use.
- * @param {Function} callback - The callback function.
+ * @param {function} callback - The callback function.
  */
 function deleteAll(db, callback) {
   const collection = db.collection('Shows');
@@ -113,9 +113,9 @@ function deleteAll(db, callback) {
 /**
  * Deletes all of the show documents in the given database with a 'channel' property that matches
  * the given channel name.
- * @param {String} channel - The name of the channel.
+ * @param {string} channel - The name of the channel.
  * @param {Object} db - The database to use.
- * @param {Function} callback - The callback function.
+ * @param {function} callback - The callback function.
  */
 function deleteShowsByChannel(channel, db, callback) {
   const collection = db.collection('Shows');
