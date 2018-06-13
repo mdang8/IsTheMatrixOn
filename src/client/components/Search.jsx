@@ -12,9 +12,6 @@ export default class Search extends React.Component {
     };
   }
 
-  autoSuggestions(currentInput) {
-  }
-
   render() {
     return (
       <div className="row">

@@ -16,35 +16,40 @@ exports.requestListings = function (callback) {
 exports.parseCurrentListingsTimes = function (htmlDocument) {
   const $ = cheerio.load(htmlDocument);
   const times = [];
+  let timeSplit;
+  let meridiem;
+  let hour;
+  let minute;
 
-  // gets the elements with the current times shown and iterates through each - this is a 3-hr range for shows
-  $('#zc-grid').find('.zc-tn-c').first().find('.zc-tn-t').each(function (i, element) {
-    // splits the text of the time (originally in the form 'H:MM XM', e.g. '4:30 PM')
-    let timeSplit = $(this).text().split(' ');
-    let meridiem = timeSplit[1];
-    let hour = (meridiem === 'AM') ?
-      parseInt(timeSplit[0].split(':')[0], 10) % 12 :
-      parseInt(timeSplit[0].split(':')[0], 10) + 12;
-    let minute = parseInt(timeSplit[0].split(':')[1], 10);
+  // gets the elements with the current times shown and iterates through each
+  $('#zc-grid').find('.zc-tn-c').first().find('.zc-tn-t')
+    .each(function (i, element) {
+      // splits the text of the time (originally in the form 'H:MM XM', e.g. '4:30 PM')
+      timeSplit = $(this).text().split(' ');
+      meridiem = timeSplit[1];
+      hour = (meridiem === 'AM') ?
+        parseInt(timeSplit[0].split(':')[0], 10) % 12 :
+        (parseInt(timeSplit[0].split(':')[0], 10) % 12) + 12;
+      minute = parseInt(timeSplit[0].split(':')[1], 10);
 
-    // @TODO - fix times array to contain Date objects
+      // @TODO - fix times array to contain Date objects
 
-    // adds the time in the element to the times array
-    times.push({
-      hour,
-      minute,
+      // adds the time in the element to the times array
+      times.push({
+        hour,
+        minute,
+      });
+
+      // assigns the 15-minute interval times between each of the 6 current listing times (15 and 45)
+      // the minute values for the 6 current listing times are either '00' or '30'
+      times.push({
+        hour: hour,
+        minute: (minute === 0) ? 15 : 45,
+      });
     });
-
-    // assigns the 15-minute interval times between each of the 6 current listing times (15 and 45)
-    // the minute values for the 6 current listing times are either '00' or '30'
-    times.push({
-      hour: hour,
-      minute: (minute === 0) ? 15 : 45,
-    });
-  });
 
   times.push({
-    hour: (parseInt(times[times.length - 1].hour, 10) + 1) % 12,
+    hour: (parseInt(times[times.length - 1].hour, 10) + 1) % 24,
     minute: (times[times.length - 1].minute === 15) ? 30 : 0,
   });
 
@@ -58,6 +63,10 @@ exports.parseCurrentShows = function (htmlDocument) {
   const shows = [];
   let channel = '';
   let showName = '';
+  let showStyle = '';
+  let startTime = null;
+  let endTime = null;
+  let widthValue = null;
   let timeAcc = 0;
   // regex for finding width style values (example string: "width:150px")
   const widthRegex = new RegExp('width:(.*)px');
@@ -76,14 +85,12 @@ exports.parseCurrentShows = function (htmlDocument) {
       // text value of the show name
       showName = $(this).find('.zc-pg-t')
         .text();
-      let showStyle = $(this).attr('style');
-      let startTime = null;
-      let endTime = null;
+      showStyle = $(this).attr('style');
 
       // **the last show on a channel does not have a style attribute**
       if (showStyle !== undefined) {
         // executes the regex to match the width value
-        let widthValue = parseInt(widthRegex.exec(showStyle)[1], 10);
+        widthValue = parseInt(widthRegex.exec(showStyle)[1], 10);
         startTime = times[timeAcc];
         // adds filled time slots to time accumulator
         timeAcc += Math.floor(widthValue / blockSize);

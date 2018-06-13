@@ -88,12 +88,22 @@ describe('Test Shows API', function () {
       });
   });
 
+  it('updates all old current shows', function (done) {
+    chai.request(server)
+      .put('/api/v1/shows')
+      .send({})
+      .end(function (err, res) {
+        res.should.have.status(200);
+        res.should.be.json;
+        done();
+      });
+  });
+
   it('deletes all shows of a channel', function (done) {
     chai.request(server)
       .delete('/api/v1/shows')
       .send({ channel: 'Test_Channel' })
       .end(function (err, res) {
-        console.log(res.body);
         res.should.have.status(200);
         res.should.be.json;
         done();

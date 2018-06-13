@@ -87,6 +87,20 @@ exports.createMultipleShows = async function (req, res) {
 };
 
 /**
+ * Makes a call to the database function to update the old current shows in the database.
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ */
+exports.updateCurrentShows = async function (req, res) {
+  const client = await database.createClient();
+  const db = database.connectDatabase(client);
+  const results = await database.updateNonCurrentShows(db);
+  database.disconnectDatabase(client);
+
+  res.status(200).send(results);
+};
+
+/**
  * Makes a call to the database function to delete all of the shows in the database.
  * @param {Object} req - The request object.
  * @param {Object} res - The response object.
