@@ -1,8 +1,8 @@
 import React from 'react';
 
-import Search from './Search.jsx';
-import Result from './Result.jsx';
-import Footer from './Footer.jsx';
+import Search from './Search';
+import Result from './Result';
+import Footer from './Footer';
 
 // eslint-disable-next-line react/prefer-stateless-function
 class Main extends React.Component {
@@ -16,13 +16,11 @@ class Main extends React.Component {
   }
 
   componentDidMount() {
-    // @TODO - change initial show to be "The Matrix"
-    fetch('/api/v1/shows/search?show=Dateline')
+    fetch(`/api/v1/shows/search?show=${encodeURIComponent('The Matrix')}`)
       .then(res => res.json())
       .then((data) => {
-        // @TODO - use returned data to render initial results
         this.setState({
-          show: 'Dateline',
+          show: 'The Matrix',
           showInfo: formatData(data),
         });
       });
@@ -32,8 +30,6 @@ class Main extends React.Component {
     fetch(`/api/v1/shows/search?show=${show}`)
       .then(res => res.json())
       .then((data) => {
-        // @ TODO - render search results
-        // sets the show value in the state using ES6 object literal shorthand syntax
         this.setState({
           show,
           showInfo: formatData(data),
@@ -46,7 +42,7 @@ class Main extends React.Component {
     return (
       <div className="container">
         <GitHubCorner />
-        <h1>Welcome to IsTheMatrixOn!</h1>
+        <h1>Search for a Show!</h1>
         <Search handleClick={this.searchShow.bind(this)} />
         <Result searchedShow={this.state.show} foundShows={this.state.showInfo} />
         <Footer />
@@ -82,14 +78,12 @@ function GitHubCorner() {
 }
 
 function formatData(showsData) {
-  const formattedShowsData = showsData.map(data => {
-    return {
-      name: data.name,
-      channel: data.channel,
-      startTime: new Date(data.startTime),
-      endTime: new Date(data.endTime),
-    };
-  });
+  const formattedShowsData = showsData.map(data => ({
+    name: data.name,
+    channel: data.channel,
+    startTime: new Date(data.startTime),
+    endTime: new Date(data.endTime),
+  }));
 
   return formattedShowsData;
 }
