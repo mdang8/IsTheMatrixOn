@@ -4,3 +4,5 @@ src/client/build/
 coverage/
 logs
 *.log
+.env
+
