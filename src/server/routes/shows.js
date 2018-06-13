@@ -23,6 +23,10 @@ router.post('/', (req, res) => {
   showsController.createMultipleShows(req, res);
 });
 
+router.put('/', (req, res) => {
+  showsController.updateCurrentShows(req, res);
+});
+
 router.delete('/', (req, res) => {
   showsController.deleteChannel(req, res);
 });

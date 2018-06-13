@@ -1,5 +1,4 @@
 language: node_js
 node_js:
-  - "9.4.0"
+  - "8.11.2"
 after_success: npm run coverage
-

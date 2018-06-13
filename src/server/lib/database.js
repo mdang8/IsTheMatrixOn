@@ -1,4 +1,5 @@
 const mongodb = require('mongodb');
+require('dotenv').config();
 
 /**
  * Creates a MongoDB client.
@@ -91,6 +92,20 @@ async function findShows(option, db) {
     throw err;
   }
 }
+
+/**
+ * Updates the "current" flag of all the old current shows.
+ * @param {Object} db - The database to use.
+ */
+exports.updateNonCurrentShows = async function (db) {
+  const collection = db.collection('Shows');
+
+  try {
+    return collection.updateMany({ current: true }, { $set: { current: false } });
+  } catch (err) {
+    throw err;
+  }
+};
 
 /**
  * Deletes all of existing the show documents in the Shows collection in the given database.
