@@ -1,7 +1,7 @@
 const request = require('request');
 const cheerio = require('cheerio');
 
-function requestListings(callback) {
+exports.requestListings = function (callback) {
   const url = 'http://api-origin.zap2it.com/tvlistings/ZCGrid.do?method=decideFwdForLineup&zipcode=02115&setMyPreference=false&lineupId=MA20483:X';
 
   request(url, (err, res, body) => {
@@ -11,9 +11,9 @@ function requestListings(callback) {
 
     callback(body);
   });
-}
+};
 
-function parseCurrentListingsTimes(htmlDocument) {
+exports.parseCurrentListingsTimes = function (htmlDocument) {
   const $ = cheerio.load(htmlDocument);
   const times = [];
 
@@ -44,14 +44,14 @@ function parseCurrentListingsTimes(htmlDocument) {
   });
 
   times.push({
-    hour: (parseInt(times[times.length - 1].hour) + 1) % 12,
+    hour: (parseInt(times[times.length - 1].hour, 10) + 1) % 12,
     minute: (times[times.length - 1].minute === 15) ? 30 : 0,
   });
 
   return times;
-}
+};
 
-function parseCurrentShows(htmlDocument) {
+exports.parseCurrentShows = function (htmlDocument) {
   const $ = cheerio.load(htmlDocument);
   const times = this.parseCurrentListingsTimes(htmlDocument);
   const currentDate = new Date();
@@ -122,12 +122,12 @@ function parseCurrentShows(htmlDocument) {
   console.log(`Parsed ${shows.length} shows.`);
 
   return shows;
-}
+};
 
-function getUniqueChannels(htmlDocument) {
+exports.getUniqueChannels = function (htmlDocument) {
   const shows = this.parseCurrentShows(htmlDocument);
   const uniqueChannels = [];
-  shows.forEach(show => {
+  shows.forEach((show) => {
     // checks if the show's channel is not in the unique channels array
     if (!uniqueChannels.includes(show.channel)) {
       uniqueChannels.push(show.channel);
@@ -135,9 +135,4 @@ function getUniqueChannels(htmlDocument) {
   });
 
   return uniqueChannels;
-}
-
-module.exports.requestListings = requestListings;
-module.exports.parseCurrentListingsTimes = parseCurrentListingsTimes;
-module.exports.parseCurrentShows = parseCurrentShows;
-module.exports.getUniqueChannels = getUniqueChannels;
+};

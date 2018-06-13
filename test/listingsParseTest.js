@@ -18,14 +18,14 @@ describe('Parse TV Listings', () => {
   });
 
   it('retrieves the current shows', function (done) {
-    this.timeout(5000);
+    this.timeout(3000);
     const shows = listingsParse.parseCurrentShows(htmlDocument);
     assert.typeOf(shows, 'array');
     done();
   });
 
   it('retrieves all the unique channels', function (done) {
-    this.timeout(5000);
+    this.timeout(3000);
     const channels = listingsParse.getUniqueChannels(htmlDocument);
     assert.typeOf(channels, 'array');
     assert.equal(channels.length, 496);
@@ -33,7 +33,7 @@ describe('Parse TV Listings', () => {
   });
 
   it('retrieves the HTML document', function (done) {
-    this.timeout(10000);
+    this.timeout(5000);
     listingsParse.requestListings((data) => {
       assert.typeOf(data, 'string');
       done();

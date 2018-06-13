@@ -1,8 +1,8 @@
 import React from 'react';
 
-import Search from './Search.jsx';
-import Result from './Result.jsx';
-import Footer from './Footer.jsx';
+import Search from './Search';
+import Result from './Result';
+import Footer from './Footer';
 
 // eslint-disable-next-line react/prefer-stateless-function
 class Main extends React.Component {
